@@ -2,10 +2,10 @@
 /*
  * Course: CPSC2720 Spring 2014
  * Name: Josh Tymburski
- * Assignment #2
+ * Assignment #4
  * Main Program
  * Professor: Robert  Benkoczi
- * Program Name: MySimulator.cc
+ * Program Name: MySimulator.cpp
  * Software Used: Geany
 */
 #include "MySimulator.h"
@@ -26,6 +26,17 @@ MySimulator::MySimulator(const Display& disp, int frames,
 	// Determine the width and height of the shape
 	displayWidth = disp.getW();
 	displayHeight = disp.getH();
+	
+	// Define animations for all the shapes within the container
+	Shape* shape;
+	std::list<Shape*>::iterator it;
+	
+	for (it = shapes.shList.begin(); it != shapes.shList.end(); ++it)
+	{
+		shape = *it;
+		shape->getAnimation(disp.getW(), disp.getH());
+	}
+	
 }
 
 void MySimulator::updateModel(double dt)
@@ -37,15 +48,7 @@ void MySimulator::updateModel(double dt)
 	for (it = shapes.shList.begin(); it != shapes.shList.end(); ++it)
 	{
 		shape = *it;
-		shape->origin.setX(shape->origin.getX() + dt*shape->speedVector.getX());
-		shape->origin.setY(shape->origin.getY() + dt*shape->speedVector.getY());
-		shape->updateMaxAndMin();
-		
-		// Ensure that shape stays in bounds
-		checkLessThanXAxis(shape);
-		checkGreaterThanXAxis(shape);
-		checkLessThanYAxis(shape);
-		checkGreaterThanYAxis(shape);
+		shape->updatePosition(dt);	
 	}
 }
 
@@ -60,44 +63,4 @@ void MySimulator::drawModel()
 void MySimulator::simulate()
 {
 	run();
-}
-
-void MySimulator::checkLessThanXAxis(Shape* shape)
-{
-	if (shape->getMinX() <= 0)
-	{
-		shape->origin.setX(shape->origin.getX() + (0 - shape->getMinX()));
-								 
-		shape->speedVector.setX((shape->speedVector.getX())*-1);
-	}
-}
-
-void MySimulator::checkGreaterThanXAxis(Shape* shape)
-{
-	if (shape->getMaxX() >= displayWidth)
-	{
-		shape->origin.setX(shape->origin.getX() - (shape->getMaxX() - displayWidth));
-								 
-		shape->speedVector.setX((shape->speedVector.getX())*-1);
-	}
-}
-
-void MySimulator::checkLessThanYAxis(Shape* shape)
-{
-	if (shape->getMinY() <= 0)
-	{
-		shape->origin.setY(shape->origin.getY() + (0 - shape->getMinY()));
-								
-		shape->speedVector.setY((shape->speedVector.getY())*-1);
-	}
-}
-
-void MySimulator::checkGreaterThanYAxis(Shape* shape)
-{
-	if (shape->getMaxY() >= displayHeight)
-	{
-		shape->origin.setY(shape->origin.getY() - (shape->getMaxY() - displayHeight));
-				
-		shape->speedVector.setY((shape->speedVector.getY())*-1);
-	}
 }

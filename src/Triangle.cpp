@@ -2,10 +2,10 @@
 /*
  * Course: CPSC2720 Spring 2014
  * Name: Josh Tymburski
- * Assignment #2
+ * Assignment #4
  * Shape Class Implementation
  * Professor: Robert  Benkoczi
- * Program Name: Triangle.cc
+ * Program Name: Triangle.cpp
  * Software Used: Geany
 */
 #include "Triangle.h"
@@ -26,7 +26,6 @@ Triangle::Triangle(double givenSideLength, double originX,
 	origin.setX(originX);
 	origin.setY(originY);
 	degreeRotation = givenDegreeRotation;
-	speedVector = randomSpeedVector();
 	startingDegree = rand() % 360;
 	updateMaxAndMin();
 }
@@ -64,4 +63,15 @@ void Triangle::updateMaxAndMin()
 	minimum.setY(std::min(origin.getY(), std::min(p1.getY(), p2.getY())));
 	maximum.setX(std::max(origin.getX(), std::max(p1.getX(), p2.getX())));
 	maximum.setY(std::max(origin.getY(), std::max(p1.getY(), p2.getY())));
+}
+
+void Triangle::updatePosition(double dt)
+{
+	// Redefine the origin dependant on time and animation
+	// strategy
+	origin = chosenAnimation->nextPosition(origin, dt);
+	
+	// Update max and min values and check shape validity
+	updateMaxAndMin();
+	chosenAnimation->checkValidityOfCurrentShape(origin, minimum, maximum);
 }

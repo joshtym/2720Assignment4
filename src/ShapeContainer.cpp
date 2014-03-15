@@ -2,20 +2,21 @@
 /*
  * Course: CPSC2720 Spring 2014
  * Name: Josh Tymburski
- * Assignment #2
+ * Assignment #4
  * Shape Class Implementation
  * Professor: Robert  Benkoczi
- * Program Name: ShapeContainer.cc
+ * Program Name: ShapeContainer.cpp
  * Software Used: Geany
 */
 #include "ShapeContainer.h"
 #include "Circle.h"
 #include "Square.h"
 #include "Triangle.h"
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <cctype>
-#include <iostream>
+
 /// Class Implementation
 /**
  * Impelmentation which defines all methods prototyped in the class
@@ -29,6 +30,7 @@ ShapeContainer::ShapeContainer()
 
 ShapeContainer::~ShapeContainer()
 {
+	//deleteShapes();
 	shList.clear();
 }
 

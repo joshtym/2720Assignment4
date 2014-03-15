@@ -2,10 +2,10 @@
 /*
  * Course: CPSC2720 Spring 2014
  * Name: Josh Tymburski
- * Assignment #1
+ * Assignment #4
  * Main Program
  * Professor: Robert  Benkoczi
- * Program Name: main.cc
+ * Program Name: main.cpp
  * Software Used: Geany
 */
 #include "Display.h"

@@ -1,16 +1,27 @@
-CFLAGS = -I /home/lib2720/allegro5/include/ -I /usr/include
-LIBDIR = -L /home/lib2720/allegro5/lib -L /usr/lib
+CCFLAGS = -I ../libs/allegro5/include/ -I /usr/include $(INCLUDEDIRS)
+LIBDIR = -L ../libs/allegro5/lib -L /usr/lib
+INCLUDEDIRS = -I ../include/
+OBJDIR = ../obj/
 LNFLAGS = -lallegro -lallegro_primitives -lcppunit -ldl
-OBJECTS = Simulator.o Triangle.o Square.o Circle.o ShapeContainer.o main.o MySimulator.o Shape.o Display.o
+OBJECTS = Simulator.o Triangle.o Square.o Circle.o ShapeContainer.o Shape.o main.o MySimulator.o Display.o Point.o Vector.o RectilinearAnimationStrategy.o
+OBJECTS2 = Point.o Vector.o Shape.o ShapeContainer.o mainTest.o
+OBJS = $(addprefix $(OBJDIR), $(OBJECTS))
+OBJS2 = $(addprefix $(OBJDIR), $(OBJECTS2))
+EXECUTALBE = ../animatedShapes
 
-animatedShapes: $(OBJECTS)
-	g++ $(LIBDIR) -o $@ $^ $(LNFLAGS) 
-
-%.o : %.cc
-	g++ $(CFLAGS) -c $^
+$(EXECUTALBE): $(OBJS)
+	g++ $(LIBDIR) -o $@ $^ $(LNFLAGS)
+	
+test: $(OBJS2) 
+	g++ $(LIBDIR) -o $@ $^ $(LNFLAGS)
+	
+$(OBJDIR)%.o : %.cpp
+	g++ -c -o $@ $< $(CCFLAGS)
 
 clean:
-	rm -f *.o *~ *% *# .#*
+	rm -f ./include/*~ ./include/*% ./include/*# ./include/.#*
+	rm -f ./src/*~ ./src/*% ./src/*# ./src/.#*
+	rm -f ../obj/*.o
 
 clean-all: clean
-	rm -f animatedShapes
+	rm -f $(EXECUTALBE)

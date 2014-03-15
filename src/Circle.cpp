@@ -2,10 +2,10 @@
 /*
  * Course: CPSC2720 Spring 2014
  * Name: Josh Tymburski
- * Assignment #1
+ * Assignment #4
  * Shape Class Implementation
  * Professor: Robert  Benkoczi
- * Program Name: Circle.cc
+ * Program Name: Circle.cpp
  * Software Used: Geany
 */
 #include "Circle.h"
@@ -23,7 +23,8 @@ Circle::Circle(double givenRadius, double originX, double originY)
 	radius = givenRadius;
 	origin.setX(originX);
 	origin.setY(originY);
-	speedVector = randomSpeedVector();
+	
+	// Update the max and min based on assigned values
 	updateMaxAndMin();
 }
 
@@ -39,4 +40,15 @@ void Circle::updateMaxAndMin()
 	minimum.setY(origin.getY() - radius);
 	maximum.setX(origin.getX() + radius);
 	maximum.setY(origin.getY() + radius);
+}
+
+void Circle::updatePosition(double dt)
+{
+	// Redefine the origin dependant on time and animation
+	// strategy
+	origin = chosenAnimation->nextPosition(origin, dt);
+	
+	// Update max and min values and check shape validity
+	updateMaxAndMin();
+	chosenAnimation->checkValidityOfCurrentShape(origin, minimum, maximum);
 }

@@ -2,10 +2,10 @@
 /*
  * Course: CPSC2720 Spring 2014
  * Name: Josh Tymburski
- * Assignment #2
+ * Assignment #4
  * Shape Class Implementation
  * Professor: Robert  Benkoczi
- * Program Name: Square.cc
+ * Program Name: Square.cpp
  * Software Used: Geany
 */
 #include "Square.h"
@@ -24,7 +24,6 @@ Square::Square(double halfSideLength, double originx,
 	origin.setX(originx);
 	origin.setY(originy);
 	sideLength = 2*halfSideLength;
-	speedVector = randomSpeedVector();
 	
 	// Based on the given values, calculates the maximum and minimum
 	// x and y coordinates
@@ -46,4 +45,14 @@ void Square::updateMaxAndMin()
 	maximum.setX(origin.getX() + sideLength/2);
 	maximum.setY(origin.getY() + sideLength/2);
 }
+
+void Square::updatePosition(double dt)
+{
+	// Redefine the origin dependant on time and animation
+	// strategy
+	origin = chosenAnimation->nextPosition(origin, dt);
 	
+	// Update max and min values and check shape validity
+	updateMaxAndMin();
+	chosenAnimation->checkValidityOfCurrentShape(origin, minimum, maximum);
+}
