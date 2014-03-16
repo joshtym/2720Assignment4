@@ -12,10 +12,8 @@
 #define RECTILINEARANIMATIONSTRATEGY_H
 
 #include "AnimationStrategyInterface.h"
-#include "Vector.h"
 
-/// Child class of AnimationStrategyInterface that utilizes it's
-/// interface to create a concrete strategy
+/// Concrete implementation of animation strategy for rectilinear movement
 /**
  * This is a defined animation strategy which, will run the animation
  * logic of a shape that simulates a shape, moving at random speeds, 

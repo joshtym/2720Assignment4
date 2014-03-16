@@ -12,6 +12,8 @@
 #define ANIMATIONSTRATEGYINTERFACE_H
 
 #include "Point.h"
+#include "Vector.h"
+#include <cstdlib>
 
 /// Class that defines an Interface for all Animated related movements
 /// of the shapes

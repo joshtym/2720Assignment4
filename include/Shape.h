@@ -15,6 +15,9 @@
 #include "Vector.h"
 #include "AnimationStrategyInterface.h"
 #include "RectilinearAnimationStrategy.h"
+#include "CircularAnimationStrategy.h"
+#include "DiamondAnimationStrategy.h"
+#include "SinusoidalAnimationStrategy.h"
 
 /// Main Parent Class of all Shapes
 /**
@@ -43,6 +46,8 @@ class Shape
 		
 		/// Update the Position based on the Animation
 		virtual void updatePosition(double) = 0;
+		
+		virtual ~Shape();
 		
 		/// Getter Functions
 		/**
