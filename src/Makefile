@@ -3,16 +3,11 @@ LIBDIR = -L ../libs/allegro5/lib -L /usr/lib
 INCLUDEDIRS = -I ../include/
 OBJDIR = ../obj/
 LNFLAGS = -lallegro -lallegro_primitives -lcppunit -ldl
-OBJECTS = Simulator.o Triangle.o Square.o Circle.o ShapeContainer.o Shape.o main.o MySimulator.o Display.o Point.o Vector.o RectilinearAnimationStrategy.o
-OBJECTS2 = Point.o Vector.o Shape.o ShapeContainer.o mainTest.o
+OBJECTS = Simulator.o Triangle.o Square.o Circle.o ShapeContainer.o Shape.o main.o MySimulator.o Display.o Point.o Vector.o RectilinearAnimationStrategy.o CircularAnimationStrategy.o SinusoidalAnimationStrategy.o
 OBJS = $(addprefix $(OBJDIR), $(OBJECTS))
-OBJS2 = $(addprefix $(OBJDIR), $(OBJECTS2))
 EXECUTALBE = ../animatedShapes
 
 $(EXECUTALBE): $(OBJS)
-	g++ $(LIBDIR) -o $@ $^ $(LNFLAGS)
-	
-test: $(OBJS2) 
 	g++ $(LIBDIR) -o $@ $^ $(LNFLAGS)
 	
 $(OBJDIR)%.o : %.cpp

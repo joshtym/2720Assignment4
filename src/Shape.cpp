@@ -9,12 +9,18 @@
  * Software Used: Geany
 */
 #include "Shape.h"
+#include <string>
 
 /// Class Implementation
 /**
  * Impelmentation which defines all methods prototyped in the class
  * interface
 **/
+
+Shape::~Shape()
+{
+	delete chosenAnimation;
+}
 
 void Shape::translate(Vector& v)
 {
@@ -25,7 +31,17 @@ void Shape::translate(Vector& v)
 
 void Shape::getAnimation(int width, int height)
 {
-	chosenAnimation = new RectilinearAnimationStrategy(width, height);
+	// Select random option for animation
+	std::string animationOptions[] = {"rectilinear", "circular", "sinusoidal"};
+	std::string animation = animationOptions[rand() % 3];
+	
+	if (animation == "rectilinear")
+		chosenAnimation = new RectilinearAnimationStrategy(width, height);
+	else if (animation == "circular")
+		chosenAnimation = new CircularAnimationStrategy(origin);
+	else if (animation == "sinusoidal")
+		chosenAnimation = new SinusoidalAnimationStrategy(width);
+	
 	chosenAnimation->randomSpeedVector();
 }
 

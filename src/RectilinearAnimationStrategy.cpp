@@ -9,7 +9,6 @@
  * Software Used: Geany
 */
 #include "RectilinearAnimationStrategy.h"
-#include <cstdlib>
 
 /// Class Implementation
 /**
