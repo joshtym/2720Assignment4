@@ -16,7 +16,6 @@
 #include "AnimationStrategyInterface.h"
 #include "RectilinearAnimationStrategy.h"
 #include "CircularAnimationStrategy.h"
-#include "DiamondAnimationStrategy.h"
 #include "SinusoidalAnimationStrategy.h"
 
 /// Main Parent Class of all Shapes
